@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,9 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/features")
 public class FeatureFlagController {
 
+    private boolean featureFlag;
+
     @GetMapping(value = "/isEnabled")
     public boolean isEnabled() {
-        return false;
+        return featureFlag;
     }
 
+    @PostMapping(value = "/setStatus")
+    public void setStatus(boolean status) {
+        this.featureFlag = status;
+    }
+
+    public boolean getFeatureFlag() {
+        return featureFlag;
+    }
 }
